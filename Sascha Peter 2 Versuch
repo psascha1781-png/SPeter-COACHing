@@ -1,0 +1,71 @@
+import React from "react";
+import { Sparkles, Download } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const Container = ({ children, className = "" }) => (
+  <div className={`mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
+);
+
+const Section = ({ id, eyebrow, title, subtitle, children }) => (
+  <section id={id} className="scroll-mt-24 py-16 sm:py-24">
+    <Container>
+      <div className="mb-10 text-center">
+        {eyebrow && (
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>{eyebrow}</span>
+          </div>
+        )}
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+        {subtitle && <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{subtitle}</p>}
+      </div>
+      {children}
+    </Container>
+  </section>
+);
+
+const DeploymentGuide = () => (
+  <Section
+    id="deployment"
+    eyebrow="Deployment"
+    title="Ihre Webseite live stellen"
+    subtitle="Schritt-für-Schritt Anleitung für GitHub & Vercel auf Deutsch"
+  >
+    <Card>
+      <CardHeader>
+        <CardTitle>Schritte für die Live-Website</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4 text-sm text-muted-foreground">
+        <ol className="list-decimal list-inside space-y-2">
+          <li>Erstellen Sie ein GitHub-Konto und legen Sie ein neues Repository an.</li>
+          <li>Bereiten Sie Ihr Projekt lokal vor und legen Sie die PDFs in den Ordner <code>public/</code>.</li>
+          <li>Initialisieren Sie Git und laden Sie den Code ins Repository hoch.</li>
+          <li>Erstellen Sie ein Vercel-Konto und verbinden Sie Ihr GitHub-Repository.</li>
+          <li>Starten Sie das Deployment – Vercel erkennt automatisch, dass es ein Next.js-Projekt ist.</li>
+          <li>Nach erfolgreichem Build ist die Seite live (z. B. <code>https://sascha-peter-coaching.vercel.app</code>).</li>
+          <li>Für Änderungen lokal committen und pushen – Vercel aktualisiert die Seite automatisch.</li>
+        </ol>
+        <p className="text-xs text-muted-foreground">
+          Tipp: Für jedes Update einfach committen und pushen. Vercel übernimmt das automatische Deployment.
+        </p>
+      </CardContent>
+    </Card>
+  </Section>
+);
+
+export default function HomePage() {
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Pricing />
+      <Contact />
+      <Checklist />
+      <Legal />
+      <DeploymentGuide />
+      <Footer />
+    </>
+  );
