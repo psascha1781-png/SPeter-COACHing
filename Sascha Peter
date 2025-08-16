@@ -1,0 +1,77 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, Calendar, ArrowRight, Sparkles, ShieldCheck, CheckCircle2, Download } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+
+const Container = ({ children, className = "" }) => (
+  <div className={`mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
+);
+
+const Section = ({ id, eyebrow, title, subtitle, children }) => (
+  <section id={id} className="scroll-mt-24 py-16 sm:py-24">
+    <Container>
+      <div className="mb-10 text-center">
+        {eyebrow && (
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>{eyebrow}</span>
+          </div>
+        )}
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+        {subtitle && <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{subtitle}</p>}
+      </div>
+      {children}
+    </Container>
+  </section>
+);
+
+// --- Neue Anleitungskomponente für Schritt-für-Schritt Deployment ---
+const DeploymentGuide = () => (
+  <Section
+    id="deployment"
+    eyebrow="Deployment"
+    title="Ihre Webseite live stellen"
+    subtitle="Schritt-für-Schritt Anleitung für GitHub & Vercel"
+  >
+    <Card>
+      <CardHeader>
+        <CardTitle>Schritte für Live-Website</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4 text-sm text-muted-foreground">
+        <ol className="list-decimal list-inside space-y-2">
+          <li>GitHub Konto erstellen und neues Repository anlegen.</li>
+          <li>Projekt lokal vorbereiten, PDFs in <code>public/</code> legen.</li>
+          <li>Git initialisieren und Code ins Repository pushen.</li>
+          <li>Vercel Konto erstellen und GitHub Repository verbinden.</li>
+          <li>Deployment starten – Vercel erkennt automatisch Next.js.</li>
+          <li>Nach erfolgreichem Build wird die Seite live (z. B. <code>https://sascha-peter-coaching.vercel.app</code>).</li>
+          <li>Änderungen lokal committen und pushen – Vercel updated automatisch.</li>
+        </ol>
+        <p className="text-xs text-muted-foreground">
+          Tipp: Für jedes Update einfach committen und pushen, Vercel kümmert sich um das automatische Deployment.
+        </p>
+      </CardContent>
+    </Card>
+  </Section>
+);
+
+export default function HomePage() {
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Pricing />
+      <Contact />
+      <Checklist />
+      <Legal />
+      <DeploymentGuide />
+      <Footer />
+    </>
+  );
+}
